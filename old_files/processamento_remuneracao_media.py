@@ -1,6 +1,6 @@
 from pyspark.sql.functions import *
 
-diretorio = "/home/matteus-paula/Downloads/dados_tcc/remun_docentes_sp"
+diretorio = "/home/matteus-paula/Downloads/dados_tcc/remun_docentes"
 
 df = spark.read.option("encoding", "ISO-8859-1").csv(f'{diretorio}/*.CSV', header=True, sep=';')
 
@@ -22,4 +22,4 @@ df_5 = df_4.groupBy(['CO_MUNICIPIO','NO_PROFISSIONAL', 'CO_UF']).agg(round(mean(
 
 df_6 = df_5.withColumnRenamed('round(avg(VL_TOTAL), 2)', 'VL_TOTAL')
 
-df_6.coalesce(1).write.csv(f'{diretorio}/rem_docentes_sp.csv', sep=';', header='true')
+df_6.coalesce(1).write.csv(f'{diretorio}/remuneracao_media_docentes.csv', sep=';', header='true')
